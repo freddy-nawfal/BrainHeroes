@@ -1,19 +1,21 @@
 
+// structure contenant un nombre a et un nombre b ainsi que la réponse du calcul
 	var calcul ={
 		a :0,
 		b :0,
-		reponse:{}
+		reponse:{},
+		startTime : new Date()
 	};
-
+// structure contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
 	var personne = {
 		difficulty : 0,
 		nb_faux : 0,
 		nb_juste : 0,
 		totalGames :0,
 		ratioFauxJuste :0,
-		startTime : new Date()
-	};
 
+	};
+// génére le calcul en fonction du niveau du joueur
 function generateCalcul(){
 	document.getElementById("reponse").innerHTML = "";
 	document.getElementById("reponse_user").value = "";
@@ -68,7 +70,7 @@ function calculateDifficulty(){
 
 function calculateBetweenTime(){
 	var currentTime = new Date();
-	var betweenTime = (currentTime - personne.startTime)/1000;
+	var betweenTime = (currentTime - calcul.startTime)/1000;
 	return betweenTime;
 }
 
@@ -77,7 +79,7 @@ function calculateBetweenTime(){
 function startNewGame(){
 	setTimeout(function(){
 		calculateDifficulty();
-		personne.startTime = Date.now();
+		calcul.startTime = Date.now();
 		generateCalcul();
 	}, 2000);
 }
