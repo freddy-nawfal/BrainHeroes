@@ -1,35 +1,41 @@
-	var a = 0;
-	var b = 0;
-	var reponse = {};
-	var difficulty = 0;
-	var nb_juste = 0;
-	var nb_faut = 0;
-	var totalGames = 0;
-	var ratioFauxJuste = 0;
-	var startTime = new Date();
+
+	var calcul ={
+		a :0,
+		b :0,
+		reponse:{}
+	};
+
+	var personne = {
+		difficulty : 0,
+		nb_faux : 0,
+		nb_juste : 0,
+		totalGames :0,
+		ratioFauxJuste :0,
+		startTime : new Date()
+	};
 
 function generateCalcul(){
 	document.getElementById("reponse").innerHTML = "";
 	document.getElementById("reponse_user").value = "";
 	document.getElementById("reponse_user").focus();
-	document.getElementById("difficulte").innerHTML = "Difficulté: "+difficulty+" | Ratio: "+ratioFauxJuste+" | Total Games: "+totalGames;
-	a = Math.floor((Math.random() * 9+difficulty) + 1);
-	b = Math.floor((Math.random() * 9+difficulty) + 1);
-	reponse = calculateReponse(a,b);
+	document.getElementById("difficulte").innerHTML = "Difficulté: "+personne.difficulty+" | Ratio: "+personne.ratioFauxJuste+" | Total Games: "+personne.totalGames;
+	calcul.a = Math.floor((Math.random() * 9+personne.difficulty) + 1);
+	calcul.b = Math.floor((Math.random() * 9+personne.difficulty) + 1);
+	calcul.reponse = calculateReponse(calcul.a,calcul.b);
 
-	document.getElementById('calcul').innerHTML = "Résolvez "+a+reponse.operator+b;
+	document.getElementById('calcul').innerHTML = "Résolvez "+calcul.a+calcul.reponse.operator+calcul.b;
 }
 
 function testReponse(e){
 	var user_reponse = document.getElementById("reponse_user").value;
 	var betweenTime = calculateBetweenTime();
-	if(user_reponse == reponse.number){
+	if(user_reponse == calcul.reponse.number){
 		document.getElementById("reponse").innerHTML = "Nice man ! Vous avez pris "+betweenTime+"s";
-		nb_juste+=1;
+		personne.nb_juste+=1;
 	}
 	else{
-		document.getElementById("reponse").innerHTML = "Mauvaise réponse ! c'était: "+reponse.number;
-		nb_faut+=1;
+		document.getElementById("reponse").innerHTML = "Mauvaise réponse ! c'était: "+calcul.reponse.number;
+		personne.nb_faux+=1;
 	}
 
 	startNewGame();
@@ -50,29 +56,29 @@ function calculateReponse(a,b){
 }
 
 function calculateDifficulty(){
-	totalGames = nb_faut + nb_juste;
-	ratioFauxJuste = (nb_juste / nb_faut).toFixed(1);
-	
-	if(ratioFauxJuste > 1) difficulty+=1;
-	if(ratioFauxJuste <=1) difficulty-=1;
-	if(ratioFauxJuste < 0.5) difficulty-=1;
+	personne.totalGames = personne.nb_faux + personne.nb_juste;
+	personne.ratioFauxJuste = (personne.nb_juste / personne.nb_faux).toFixed(1);
 
-	if(difficulty <= 0) difficulty = 0;
+	if(personne.ratioFauxJuste > 1) personne.difficulty+=1;
+	if(personne.ratioFauxJuste <=1) personne.difficulty-=1;
+	if(personne.ratioFauxJuste < 0.5) personne.difficulty-=1;
+
+	if(personne.difficulty <= 0) personne.difficulty = 0;
 }
 
 function calculateBetweenTime(){
 	var currentTime = new Date();
-	var betweenTime = (currentTime - startTime)/1000;
+	var betweenTime = (currentTime - personne.startTime)/1000;
 	return betweenTime;
 }
 
 
 
 function startNewGame(){
-	setTimeout(function(){ 
+	setTimeout(function(){
 		calculateDifficulty();
-		startTime = Date.now();
-		generateCalcul(); 
+		personne.startTime = Date.now();
+		generateCalcul();
 	}, 2000);
 }
 
