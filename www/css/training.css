@@ -9,7 +9,7 @@ body{
 }
 button{
 	font-family: "IndieFlower";
-	font-size: 20px;
+	font-size: 15px;
 	color:white;
 	text-align: center;
 	background-color: #e74c3c;
@@ -17,7 +17,7 @@ button{
 	padding: 5px;
 	border-radius: 5px;
 	outline: none;
-	width: 10%;
+	width: 15%;
 	z-index: 9999;
 }
 #user{
@@ -51,14 +51,29 @@ button{
 	font-size: 50px;
 	text-align: center;
 }
-#reponse, #difficulte{
+#reponse{
 	display: block;
 	margin: 0 auto;
 	width:60%;
 	font-size: 30px;
 	text-align: center;
-}
-#reponse{
 	font-size: 60px;
 	padding: 20px;
+}
+#display{
+	padding: 10px;
+	position: relative;
+	background-color: #3498db;
+}
+#display #difficulte{
+	position: absolute;
+	top: 10px; right: 10px;
+	font-size: 15px;
+}
+.nope{
+	text-decoration: line-through ;
+	color: #c0392b;
+}
+.dope{
+	color: #27ae60;
 }

@@ -20,23 +20,23 @@ function generateCalcul(){
 	document.getElementById("reponse").innerHTML = "";
 	document.getElementById("reponse_user").value = "";
 	document.getElementById("reponse_user").focus();
-	document.getElementById("difficulte").innerHTML = "Difficulté: "+personne.difficulty+" | Ratio: "+personne.ratioFauxJuste+" | Total Games: "+personne.totalGames;
+	document.getElementById("difficulte").innerHTML = "D: "+personne.difficulty+" | R: "+personne.ratioFauxJuste+" | G: "+personne.totalGames;
 	calcul.a = Math.floor((Math.random() * 9+personne.difficulty) + 1);
 	calcul.b = Math.floor((Math.random() * 9+personne.difficulty) + 1);
 	calcul.reponse = calculateReponse(calcul.a,calcul.b);
 
-	document.getElementById('calcul').innerHTML = "Résolvez "+calcul.a+calcul.reponse.operator+calcul.b;
+	document.getElementById('calcul').innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = ?";
 }
 
 function testReponse(e){
 	var user_reponse = document.getElementById("reponse_user").value;
 	var betweenTime = calculateBetweenTime();
 	if(user_reponse == calcul.reponse.number){
-		document.getElementById("reponse").innerHTML = "Nice man ! Vous avez pris "+betweenTime+"s";
+		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>";
 		personne.nb_juste+=1;
 	}
 	else{
-		document.getElementById("reponse").innerHTML = "Mauvaise réponse ! c'était: "+calcul.reponse.number;
+		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='nope'>&nbsp;"+user_reponse+"&nbsp;</span>&nbsp;"+calcul.reponse.number;
 		personne.nb_faux+=1;
 	}
 
@@ -60,6 +60,8 @@ function calculateReponse(a,b){
 function calculateDifficulty(){
 	personne.totalGames = personne.nb_faux + personne.nb_juste;
 	personne.ratioFauxJuste = (personne.nb_juste / personne.nb_faux).toFixed(1);
+	if(!isFinite(personne.ratioFauxJuste))personne.ratioFauxJuste = "&infin;";
+
 
 	if(personne.ratioFauxJuste > 1) personne.difficulty+=1;
 	if(personne.ratioFauxJuste <=1) personne.difficulty-=1;
