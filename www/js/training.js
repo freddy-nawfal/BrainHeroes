@@ -1,18 +1,18 @@
 
-// structure contenant un nombre a et un nombre b ainsi que la réponse du calcul
+// objet contenant un nombre a et un nombre b ainsi que la réponse du calcul
 	var calcul ={
 		a :0,
 		b :0,
 		reponse:{},
 		startTime : new Date()
 	};
-// structure contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
+// objet contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
 	var personne = {
 		difficulty : 0,
 		nb_faux : 0,
 		nb_juste : 0,
 		totalGames :0,
-		ratioFauxJuste :0,
+		ratioFauxJuste :0
 
 	};
 // génére le calcul en fonction du niveau du joueur
