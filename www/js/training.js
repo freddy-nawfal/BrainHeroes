@@ -4,7 +4,8 @@
 		a :0,
 		b :0,
 		reponse:{},
-		startTime : new Date()
+		startTime : new Date(),
+		palier : 5
 	};
 // objet contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
 	var personne = {
@@ -72,15 +73,15 @@ function calculateDifficulty(){
 	personne.ratioFauxJuste = (personne.nb_juste / personne.nb_faux).toFixed(1);
 	if(!isFinite(personne.ratioFauxJuste))personne.ratioDisplayed = "&infin;";
 
-	if(personne.justes_affilee > 1)personne.totalDifficulty+=1;
+	if(personne.justes_affilee > 0)personne.totalDifficulty+=1;
 	if(personne.justes_affilee > 5)personne.totalDifficulty+=2;
 	if(personne.faux_affilee > 0)personne.totalDifficulty-=1;
 	if(personne.faux_affilee > 3)personne.totalDifficulty-=2;
 
 	if(personne.totalDifficulty < 0)personne.totalDifficulty=0;
 
-	personne.difficulty = personne.totalDifficulty;
 	
+	personne.difficulty = personne.totalDifficulty%calcul.palier;
 }
 
 function calculateBetweenTime(){
@@ -90,11 +91,15 @@ function calculateBetweenTime(){
 }
 
 function calculateLevels(){
-	personne.level = (Math.floor(personne.difficulty/5));
-	if((personne.difficulty/5)>=1){
+	personne.level = (Math.floor(personne.totalDifficulty/calcul.palier));
+	if((personne.difficulty/calcul.palier)>=1){
 		personne.difficulty = 0;
 	}
+
 	console.log(personne.level);
+
+	$('#lvl').val((personne.difficulty/calcul.palier)*100);
+	$('#level').html(personne.level);
 }
 
 
