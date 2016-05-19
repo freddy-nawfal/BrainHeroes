@@ -11,16 +11,18 @@
     </head>
     <body>
         <div class="app">
-        	<a href="index.html"><button>Back</button></a>
+        	<a href="index.html" id="back"><button>Back</button></a>
             <div id="display">
          		<div id="reponse"></div>
     			<div id="calcul"></div>
     			<div id="difficulte"></div>
     			<div id="reponse"></div>
             </div>
+            <div id="time"></div>
 			<div id="user">
 				<form id="form" onsubmit="testReponse(); return false;">
-					<input type="text" id="reponse_user" autocomplete="off" name="nbr"></input>
+					<input type="tel" id="reponse_user" autocomplete="off" name="nbr"></input>
+                    <button type="submit" id="validate">ok</button>
 				</form>
 			</div>
         </div>

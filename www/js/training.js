@@ -11,16 +11,18 @@
 		difficulty : 0,
 		nb_faux : 0,
 		nb_juste : 0,
-		totalGames :0,
-		ratioFauxJuste :0
+		totalGames : 0,
+		ratioFauxJuste : 0,
+		ratioDisplayed : 0
 
 	};
 // génére le calcul en fonction du niveau du joueur
 function generateCalcul(){
 	document.getElementById("reponse").innerHTML = "";
 	document.getElementById("reponse_user").value = "";
+	$('#time').html("");
 	document.getElementById("reponse_user").focus();
-	document.getElementById("difficulte").innerHTML = "D: "+personne.difficulty+" | R: "+personne.ratioFauxJuste+" | G: "+personne.totalGames;
+	document.getElementById("difficulte").innerHTML = "D: "+personne.difficulty+" | R: "+personne.ratioDisplayed+" | G: "+personne.totalGames;
 	calcul.a = Math.floor((Math.random() * 9+personne.difficulty) + 1);
 	calcul.b = Math.floor((Math.random() * 9+personne.difficulty) + 1);
 	calcul.reponse = calculateReponse(calcul.a,calcul.b);
@@ -33,11 +35,14 @@ function testReponse(e){
 	var betweenTime = calculateBetweenTime();
 	if(user_reponse == calcul.reponse.number){
 		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>";
+		$('#time').html("Time: "+betweenTime+"s");
 		personne.nb_juste+=1;
 	}
 	else{
 		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='nope'>&nbsp;"+user_reponse+"&nbsp;</span>&nbsp;"+calcul.reponse.number;
+		$('#time').html("Time: "+betweenTime+"s");
 		personne.nb_faux+=1;
+
 	}
 
 	startNewGame();
@@ -60,7 +65,7 @@ function calculateReponse(a,b){
 function calculateDifficulty(){
 	personne.totalGames = personne.nb_faux + personne.nb_juste;
 	personne.ratioFauxJuste = (personne.nb_juste / personne.nb_faux).toFixed(1);
-	if(!isFinite(personne.ratioFauxJuste))personne.ratioFauxJuste = "&infin;";
+	if(!isFinite(personne.ratioFauxJuste))personne.ratioDisplayed = "&infin;";
 
 
 	if(personne.ratioFauxJuste > 1) personne.difficulty+=1;
