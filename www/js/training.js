@@ -104,6 +104,7 @@ function calculateLevels(){
 
 	$('#lvl').val((personne.difficulty/calcul.palier)*100);
 	$('#level').html(personne.level);
+	$('#percentage').html(((personne.difficulty/calcul.palier)*100).toFixed(0)+"%");
 }
 
 

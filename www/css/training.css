@@ -101,7 +101,15 @@ button{
   right:230px;
   padding-top: 5px;
 }
+#percentage{
+  position: absolute;
+  right:100px;
+  padding-top: 5px;
+  z-index: 99;
+  text-align: center;
+}
 progress {
+  z-index: -1;
   position: absolute;
   padding: 4px;
   right:10px;
