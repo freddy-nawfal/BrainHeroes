@@ -107,15 +107,30 @@ function calculateLevels(){
 	$('#percentage').html(((personne.difficulty/calcul.palier)*100).toFixed(0)+"%");
 }
 
+function save(){
+	window.localStorage.clear();
+  window.localStorage.setItem("personne", JSON.stringify(personne));
+}
+
+function load(next){
+	if(window.localStorage.getItem("personne")){
+		personne = JSON.parse(window.localStorage.getItem("personne"));
+	}
+	next();
+}
+
 
 function startNewGame(){
 	setTimeout(function(){
 		calculateDifficulty();
 		calcul.startTime = Date.now();
 		calculateLevels();
+		save();
 		generateCalcul();
 	}, 2000);
 }
 
-
-generateCalcul();
+load(function(){
+	calculateLevels();
+	generateCalcul();
+});
