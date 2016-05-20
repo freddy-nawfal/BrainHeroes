@@ -13,25 +13,24 @@
         <div class="app">
         	<a href="index.html" id="back"><button>Back</button></a>
             <div id="progress">
-                    Level <span id="level">0</span><progress value="0" max="100" id="lvl">0 %</progress>
-                </div>
+                  <span id="lvlDisplay">Level <span id="level">0</span></span><progress value="0" max="100" id="lvl">0 %</progress>
+            </div>
             <div id="display">
-                
+
     			<div id="calcul"></div>
     			<div id="stats"></div>
             </div>
             <div id="time"></div>
 			<div id="user">
 				<form id="form" onsubmit="testReponse(); return false;">
-					<input type="tel" id="reponse_user" autocomplete="off" name="nbr"></input>
-                    <button type="submit" id="validate">ok</button>
+					      <input type="tel" id="reponse_user" autocomplete="off" name="nbr"></input>
+                <button type="submit" id="validate">ok</button>
 				</form>
 			</div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/training.js"></script>
+        <script type="text/javascript" src="js/training.js"></script>  
     </body>
 </html>
-
