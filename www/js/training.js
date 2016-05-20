@@ -5,7 +5,7 @@
 		b :0,
 		reponse:{},
 		startTime : new Date(),
-		palier : 5
+		palier : 25
 	};
 // objet contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
 	var personne = {
@@ -60,11 +60,15 @@ function calculateReponse(a,b){
 	if(x == 1){
 		return {number:a+b, operator:"+"};
 	}
-	if(x == 2){
+	if(x == 2 && personne.level > 0){
 		return {number:a-b, operator:"-"};
 	}
-	if(x == 3){
+		else if(x == 3 && personne.level > 1){
 		return {number:a*b, operator:"*"};
+	}
+
+	else {
+			return {number:a+b, operator:"+"};
 	}
 }
 
@@ -80,7 +84,7 @@ function calculateDifficulty(){
 
 	if(personne.totalDifficulty < 0)personne.totalDifficulty=0;
 
-	
+
 	personne.difficulty = personne.totalDifficulty%calcul.palier;
 }
 
