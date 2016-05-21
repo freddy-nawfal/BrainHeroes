@@ -20,31 +20,63 @@
 		ratioDisplayed : 0,
 		level : 0
 	};
+
+	var fields = {
+		reponse_user : $('#reponse_user'),
+		time : $('#time')
+	}
+
+	var sounds = {};
+
+	var opts = {
+	  lines: 13 // The number of lines to draw
+	, length: 0 // The length of each line
+	, width: 8 // The line thickness
+	, radius: 23 // The radius of the inner circle
+	, scale: 1 // Scales overall size of the spinner
+	, corners: 1 // Corner roundness (0..1)
+	, color: '#000' // #rgb or #rrggbb or array of colors
+	, opacity: 0 // Opacity of the lines
+	, rotate: 0 // The rotation offset
+	, direction: 1 // 1: clockwise, -1: counterclockwise
+	, speed: 1.4 // Rounds per second
+	, trail: 47 // Afterglow percentage
+	, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+	, zIndex: 2e9 // The z-index (defaults to 2000000000)
+	, className: 'spinner' // The CSS class to assign to the spinner
+	, top: '50%' // Top position relative to parent
+	, left: '50%' // Left position relative to parent
+	, shadow: false // Whether to render a shadow
+	, hwaccel: false // Whether to use hardware acceleration
+	, position: 'absolute' // Element positioning
+	}
+	var target = document.getElementById('spinner')
+	var spinner = new Spinner(opts);
+
+
 // génére le calcul en fonction du niveau du joueur
 function generateCalcul(){
-	document.getElementById("reponse_user").value = "";
-	$('#time').html("");
-	document.getElementById("reponse_user").focus();
-	document.getElementById("stats").innerHTML = "J: "+personne.nb_juste+" | T: "+personne.totalGames+" | JA: "+personne.justes_affilee+" | FA: "+personne.faux_affilee+" | D: "+personne.difficulty+" | TD: "+personne.totalDifficulty;
+	clearFields();
+	$("#stats").html("J: "+personne.nb_juste+" | T: "+personne.totalGames+" | JA: "+personne.justes_affilee+" | FA: "+personne.faux_affilee+" | D: "+personne.difficulty+" | TD: "+personne.totalDifficulty);
 	calcul.a = Math.floor((Math.random() * (9+personne.difficulty)) + 1);
 	calcul.b = Math.floor((Math.random() * (9+personne.difficulty)) + 1);
 	calcul.reponse = calculateReponse(calcul.a,calcul.b);
 
-	document.getElementById('calcul').innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = ?";
+	$('#calcul').html(calcul.a+calcul.reponse.operator+calcul.b+" = ?");
 }
 
 function testReponse(e){
-	var user_reponse = document.getElementById("reponse_user").value;
+	var user_reponse = $('#reponse_user').val();
 	var betweenTime = calculateBetweenTime();
 	if(user_reponse == calcul.reponse.number){
-		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>";
+		$("#calcul").html(calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>");
 		$('#time').html("Time: "+betweenTime+"s");
 		personne.nb_juste+=1;
 		personne.justes_affilee+=1;
 		personne.faux_affilee=0;
 	}
 	else{
-		document.getElementById("calcul").innerHTML = calcul.a+calcul.reponse.operator+calcul.b+" = <span class='nope'>&nbsp;"+user_reponse+"&nbsp;</span>&nbsp;"+calcul.reponse.number;
+		$("#calcul").html(calcul.a+calcul.reponse.operator+calcul.b+" = <span class='nope'>&nbsp;"+user_reponse+"&nbsp;</span>&nbsp;"+calcul.reponse.number);
 		$('#time').html("Time: "+betweenTime+"s");
 		personne.nb_faux+=1;
 		personne.justes_affilee=0;
@@ -100,8 +132,6 @@ function calculateLevels(){
 		personne.difficulty = 0;
 	}
 
-	console.log(personne.level);
-
 	$('#lvl').val((personne.difficulty/calcul.palier)*100);
 	$('#level').html(personne.level);
 	$('#percentage').html(((personne.difficulty/calcul.palier)*100).toFixed(0)+"%");
@@ -113,12 +143,13 @@ function save(){
 }
 
 function load(next){
+	spinner.spin(target);
+
 	if(window.localStorage.getItem("personne")){
 		personne = JSON.parse(window.localStorage.getItem("personne"));
 	}
 	next();
 }
-
 
 function startNewGame(){
 	setTimeout(function(){
@@ -130,7 +161,19 @@ function startNewGame(){
 	}, 2000);
 }
 
-load(function(){
-	calculateLevels();
-	generateCalcul();
-});
+function clearFields(){
+	fields.reponse_user.val('');
+	fields.time.html('');
+	fields.reponse_user.focus();
+}
+
+
+	load(function(){
+	  spinner.stop();
+		$('#display').fadeIn();
+		$('#progress').fadeIn();
+		$('#user').fadeIn();
+
+		calculateLevels();
+		generateCalcul();
+	});

@@ -11,19 +11,19 @@
     </head>
     <body>
         <div class="app">
+          <span id="spinner"></span>
         	<a href="index.html" id="back"><button>Back</button></a>
-            <div id="progress">
+            <div id="progress" style="display:none;">
                   <span id="lvlDisplay">Level <span id="level">0</span></span>
                   <progress value="0" max="100" id="lvl"></progress>
                   <span id="percentage">0%</span>
             </div>
-            <div id="display">
-
-    			<div id="calcul"></div>
-    			<div id="stats"></div>
+            <div id="display" style="display:none;">
+        			<div id="calcul"></div>
+        			<div id="stats"></div>
             </div>
             <div id="time"></div>
-			<div id="user">
+			<div id="user" style="display:none;" >
 				<form id="form" onsubmit="testReponse(); return false;">
 					      <input type="tel" id="reponse_user" autocomplete="off" name="nbr"></input>
                 <button type="submit" id="validate">ok</button>
@@ -33,6 +33,10 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/spin.js"></script>
         <script type="text/javascript" src="js/training.js"></script>
+        <script type="text/javascript">
+          //document.addEventListener("deviceready", onDeviceReady, false);
+        </script>
     </body>
 </html>

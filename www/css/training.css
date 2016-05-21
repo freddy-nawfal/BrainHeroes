@@ -90,6 +90,7 @@ button{
 #progress #lvl{
 	height: 30px;
 	width: 200px;
+  transition: width 1s;
 }
 #back{
 	width: 30%;
@@ -100,6 +101,7 @@ button{
   position: absolute;
   right:230px;
   padding-top: 5px;
+  transition:  1s;
 }
 #percentage{
   position: absolute;
@@ -107,6 +109,7 @@ button{
   padding-top: 5px;
   z-index: 99;
   text-align: center;
+  transition:  1s;
 }
 progress {
   z-index: -1;
@@ -126,4 +129,34 @@ progress::-webkit-progress-value {
   background: #c0392b;
   box-shadow: inset 0 -2px 4px rgba(0,0,0,0.4), 0 2px 5px 0px rgba(0,0,0,0.3);
   transition: width 2s;
+}
+
+@media (max-width: 350px){
+  #lvlDisplay{
+    font-size: 10px;
+  }
+}
+@media (min-width: 400px){
+  #lvlDisplay{
+    font-size: 16px;
+    right:280px;
+  }
+  #progress #lvl{
+    width: 250px;
+  }
+  #percentage{
+    right: 125px;
+  }
+}
+@media (min-width: 900px){
+  #lvlDisplay{
+    font-size: 15px;
+    right: 645px;
+  }
+  #progress #lvl{
+    width: 600px;
+  }
+  #percentage{
+    right: 300px;
+  }
 }
