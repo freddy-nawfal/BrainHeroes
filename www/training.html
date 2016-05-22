@@ -10,9 +10,16 @@
         <title>Brain Heroes</title>
     </head>
     <body>
-        <div class="app">
+      <nav id="menu">
+        <header>
+          <h2><a href="index.html"><button id="back">Back</button></a> Stats</h2>
+        </header>
+        <div id="stats"></div><br>
+
+      </nav>
+        <main id="panel">
           <span id="spinner"></span>
-        	<a href="index.html" id="back"><button>Back</button></a>
+        	<button onclick="slide();">More</button>
             <div id="progress" style="display:none;">
                   <span id="lvlDisplay">Level <span id="level">0</span></span>
                   <progress value="0" max="100" id="lvl"></progress>
@@ -29,14 +36,42 @@
                 <button type="submit" id="validate">ok</button>
 				</form>
 			</div>
-        </div>
+    </main>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/slideout.min.js"></script>
         <script type="text/javascript" src="js/spin.js"></script>
         <script type="text/javascript" src="js/training.js"></script>
-        <script type="text/javascript">
-          //document.addEventListener("deviceready", onDeviceReady, false);
-        </script>
+        <script>
+  var slideout = new Slideout({
+    'panel': document.getElementById('panel'),
+    'menu': document.getElementById('menu'),
+    'padding': 256,
+    'tolerance': 70,
+  });
+</script>
+
+<script type="text/javascript">
+var timeSlided = 0;
+var nowslided;
+function slide(){
+  if(!slideout.isOpen()){
+    slideout.open();
+    nowslided = new Date();
+  }
+  else{
+    slideout.close();
+    timeSlided += ((new Date()) - nowslided)/1000;
+  }
+}
+
+
+  $('#stats').append('<div>Total Games: '+personne.totalGames()+'</div>');
+  $('#stats').append('<div>Wins: '+personne.nb_juste+' / Loses: '+personne.nb_faux+'</div>');
+  $('#stats').append('<div>Ratio: '+personne.ratioDisplayed()+'</div>');
+  $('#stats').append('<div>Top wins in a row: '+personne.top_justes_affilee+'</div>');
+  $('#stats').append('<div>Average Time: '+personne.AverageTime()+'s</div>');
+</script>
     </body>
 </html>

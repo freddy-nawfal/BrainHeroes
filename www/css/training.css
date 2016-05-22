@@ -20,6 +20,7 @@ button{
 	width: 15%;
 	z-index: 9999;
 }
+
 #user{
 	position: absolute;
 	bottom: 0;
@@ -159,4 +160,36 @@ progress::-webkit-progress-value {
   #percentage{
     right: 300px;
   }
+}
+#stats{
+  color:#f4f4f4;
+  font-size: 18px;
+}
+
+.slideout-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  width: 256px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  padding-left:10px;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+  transition: 1s;
+}
+.slideout-open #user{
+  display: none;
+}
+
+.slideout-open .slideout-menu {
+  display: block;
 }

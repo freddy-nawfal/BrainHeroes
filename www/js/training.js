@@ -139,8 +139,9 @@ function calculateDifficulty(){
 
 function calculateBetweenTime(){
 	var currentTime = new Date();
-	var betweenTime = (currentTime - calcul.startTime)/1000;
-	return betweenTime;
+	var betweenTime =((currentTime - calcul.startTime)/1000) - timeSlided;
+	timeSlided = 0;
+	return betweenTime.toFixed(3);
 }
 
 function displayLevel(){
