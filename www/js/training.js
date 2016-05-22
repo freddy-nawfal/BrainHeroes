@@ -9,24 +9,48 @@
 	};
 // objet contenant la difficulte lié au niveau du joueur, le nombre de calcul faux réalisé, le nombre de calcul juste, le nombre de calcul effectué et le ratio du joueur
 	var personne = {
-		difficulty : 0,
 		totalDifficulty : 0,
 		nb_faux : 0,
 		nb_juste : 0,
 		justes_affilee : 0,
+		top_justes_affilee : 0,
 		faux_affilee : 0,
-		totalGames : 0,
-		ratioFauxJuste : 0,
-		ratioDisplayed : 0,
-		level : 0
+		times : [],
+
+		totalGames : function(){
+			return (this.nb_juste + this.nb_faux);
+		},
+		ratioDisplayed : function(){
+			if(!isFinite(this.ratioFauxJuste())) return "&infin;";
+			else return this.ratioFauxJuste();
+		},
+		difficulty : function(){
+			if(((this.totalDifficulty%calcul.palier)/calcul.palier)>=1){
+				return 0;
+			}
+			else{
+				return (this.totalDifficulty%calcul.palier);
+			}
+		},
+		ratioFauxJuste : function(){
+				return (this.nb_juste / this.nb_faux);
+		},
+		level : function(){
+			return (Math.floor(personne.totalDifficulty/calcul.palier));
+		},
+		AverageTime : function(){
+			var all = 0;
+			for (var i = 0; i < this.times.length; i++) {
+					all += this.times[i];
+				}
+				return (all/this.times.length).toFixed(3);
+			}
 	};
 
 	var fields = {
 		reponse_user : $('#reponse_user'),
 		time : $('#time')
 	}
-
-	var sounds = {};
 
 	var opts = {
 	  lines: 13 // The number of lines to draw
@@ -57,9 +81,8 @@
 // génére le calcul en fonction du niveau du joueur
 function generateCalcul(){
 	clearFields();
-	$("#stats").html("J: "+personne.nb_juste+" | T: "+personne.totalGames+" | JA: "+personne.justes_affilee+" | FA: "+personne.faux_affilee+" | D: "+personne.difficulty+" | TD: "+personne.totalDifficulty);
-	calcul.a = Math.floor((Math.random() * (9+personne.difficulty)) + 1);
-	calcul.b = Math.floor((Math.random() * (9+personne.difficulty)) + 1);
+	calcul.a = Math.floor((Math.random() * (9+personne.difficulty())) + 1);
+	calcul.b = Math.floor((Math.random() * (9+personne.difficulty())) + 1);
 	calcul.reponse = calculateReponse(calcul.a,calcul.b);
 
 	$('#calcul').html(calcul.a+calcul.reponse.operator+calcul.b+" = ?");
@@ -73,6 +96,7 @@ function testReponse(e){
 		$('#time').html("Time: "+betweenTime+"s");
 		personne.nb_juste+=1;
 		personne.justes_affilee+=1;
+		if(personne.justes_affilee > personne.top_justes_affilee) personne.top_justes_affilee = personne.justes_affilee;
 		personne.faux_affilee=0;
 	}
 	else{
@@ -82,7 +106,7 @@ function testReponse(e){
 		personne.justes_affilee=0;
 		personne.faux_affilee+=1;
 	}
-
+	personne.times.push(betweenTime);
 	startNewGame();
 }
 
@@ -92,10 +116,10 @@ function calculateReponse(a,b){
 	if(x == 1){
 		return {number:a+b, operator:"+"};
 	}
-	if(x == 2 && personne.level > 0){
+	if(x == 2 && personne.level() > 0){
 		return {number:a-b, operator:"-"};
 	}
-		else if(x == 3 && personne.level > 1){
+		else if(x == 3 && personne.level() > 1){
 		return {number:a*b, operator:"*"};
 	}
 
@@ -105,19 +129,12 @@ function calculateReponse(a,b){
 }
 
 function calculateDifficulty(){
-	personne.totalGames = personne.nb_faux + personne.nb_juste;
-	personne.ratioFauxJuste = (personne.nb_juste / personne.nb_faux).toFixed(1);
-	if(!isFinite(personne.ratioFauxJuste))personne.ratioDisplayed = "&infin;";
-
 	if(personne.justes_affilee > 0)personne.totalDifficulty+=1;
 	if(personne.justes_affilee > 5)personne.totalDifficulty+=2;
 	if(personne.faux_affilee > 0)personne.totalDifficulty-=1;
 	if(personne.faux_affilee > 3)personne.totalDifficulty-=2;
 
 	if(personne.totalDifficulty < 0)personne.totalDifficulty=0;
-
-
-	personne.difficulty = personne.totalDifficulty%calcul.palier;
 }
 
 function calculateBetweenTime(){
@@ -126,27 +143,36 @@ function calculateBetweenTime(){
 	return betweenTime;
 }
 
-function calculateLevels(){
-	personne.level = (Math.floor(personne.totalDifficulty/calcul.palier));
-	if((personne.difficulty/calcul.palier)>=1){
-		personne.difficulty = 0;
-	}
-
-	$('#lvl').val((personne.difficulty/calcul.palier)*100);
-	$('#level').html(personne.level);
-	$('#percentage').html(((personne.difficulty/calcul.palier)*100).toFixed(0)+"%");
+function displayLevel(){
+	$('#lvl').val((personne.difficulty()/calcul.palier)*100);
+	$('#level').html(personne.level());
+	$('#percentage').html(((personne.difficulty()/calcul.palier)*100).toFixed(0)+"%");
 }
 
 function save(){
-	window.localStorage.clear();
-  window.localStorage.setItem("personne", JSON.stringify(personne));
+	var toSave = {
+		totalDifficulty : personne.totalDifficulty,
+		nb_faux : personne.nb_faux,
+		nb_juste : personne.nb_juste,
+		justes_affilee : personne.justes_affilee,
+		top_justes_affilee : personne.top_justes_affilee,
+		faux_affilee : personne.faux_affilee,
+		times : personne.times
+	}
+	window.localStorage.removeItem("personne");
+  window.localStorage.setItem("personne", JSON.stringify(toSave));
 }
 
 function load(next){
 	spinner.spin(target);
 
 	if(window.localStorage.getItem("personne")){
-		personne = JSON.parse(window.localStorage.getItem("personne"));
+		var gotSaves = JSON.parse(window.localStorage.getItem("personne"));
+		for (var key in gotSaves) {
+		  if (gotSaves.hasOwnProperty(key)) {
+				personne[key] = gotSaves[key];
+		  }
+		}
 	}
 	next();
 }
@@ -155,10 +181,10 @@ function startNewGame(){
 	setTimeout(function(){
 		calculateDifficulty();
 		calcul.startTime = Date.now();
-		calculateLevels();
+		displayLevel();
 		save();
 		generateCalcul();
-	}, 2000);
+	}, 1000);
 }
 
 function clearFields(){
@@ -174,6 +200,6 @@ function clearFields(){
 		$('#progress').fadeIn();
 		$('#user').fadeIn();
 
-		calculateLevels();
+		displayLevel();
 		generateCalcul();
 	});
