@@ -147,5 +147,9 @@ span#tamere{
     display: block;
     z-index: 3;
 }
-
+#title{
+	width: 40%;
+	margin: 0 auto;
+	display: block;
+}
 

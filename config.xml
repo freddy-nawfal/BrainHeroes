@@ -25,6 +25,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="android-installLocation" value="auto" />
+    <preference name="AndroidPersistanceFileLocation" value="Compatibility" />
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
@@ -43,7 +44,7 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    
+
     <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/Brain.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/Brain.png" />
     <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/Brain.png" />

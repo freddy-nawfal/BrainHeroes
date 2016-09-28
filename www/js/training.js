@@ -90,7 +90,7 @@ function generateCalcul(){
 
 function testReponse(e){
 	var user_reponse = $('#reponse_user').val();
-	var betweenTime = calculateBetweenTime();
+	var betweenTime = calculateBetweenTime().toFixed(3);
 	if(user_reponse == calcul.reponse.number){
 		$("#calcul").html(calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>");
 		$('#time').html("Time: "+betweenTime+"s");
@@ -106,7 +106,6 @@ function testReponse(e){
 		personne.justes_affilee=0;
 		personne.faux_affilee+=1;
 	}
-	personne.times.push(betweenTime);
 	startNewGame();
 }
 
@@ -141,7 +140,8 @@ function calculateBetweenTime(){
 	var currentTime = new Date();
 	var betweenTime =((currentTime - calcul.startTime)/1000) - timeSlided;
 	timeSlided = 0;
-	return betweenTime.toFixed(3);
+	personne.times.push(betweenTime);
+	return betweenTime;
 }
 
 function displayLevel(){
@@ -194,7 +194,7 @@ function clearFields(){
 	fields.reponse_user.focus();
 }
 
-
+$(window).load(function(){
 	load(function(){
 	  spinner.stop();
 		$('#display').fadeIn();
@@ -204,3 +204,4 @@ function clearFields(){
 		displayLevel();
 		generateCalcul();
 	});
+});
