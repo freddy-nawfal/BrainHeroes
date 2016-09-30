@@ -1,0 +1,13 @@
+#loading{
+	font-family: Arial;
+	width: 50%;
+	height: 150px;
+	background-color: white;
+	margin: 10px auto;
+	text-align: center;
+	overflow: hidden;
+	padding-top: 30px;
+}
+#loadingInfo{
+	padding-top:20px;
+}
