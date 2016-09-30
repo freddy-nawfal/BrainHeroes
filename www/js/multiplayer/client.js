@@ -40,6 +40,6 @@ var errors = {
 
 loading();
 
-var socket = io('http://localhost');
+var socket = io('http://localhost:3000');
 
 errorsHandler();
