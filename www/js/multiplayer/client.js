@@ -8,7 +8,7 @@ function loaded(){
 	$('#loading').hide();
 }
 function printLoadingMsg(msg){
-	$('#loadingInfo').html(msg+"<br>");
+	$('#loadingInfo').append(msg+"<br>");
 }
 
 
@@ -47,6 +47,7 @@ var errors = {
 
 function connectionHandlers(){
 	socket.on('connected', cHandlers.connected);
+	socket.on('usersConnected', cHandlers.usersConnected);
 }
 
 var cHandlers = {
@@ -55,12 +56,15 @@ var cHandlers = {
 		setTimeout(function(){
 			loaded();
 		},3000);
+	},
+	usersConnected : function(data){
+		$('#users').html(data);
 	}
 }
 
 loading();
 
-var socket = io('http://localhost:3000');
+var socket = io('http://192.168.1.17:3000');
 
 errorsHandler();
 connectionHandlers();
