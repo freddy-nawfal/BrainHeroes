@@ -1,7 +1,10 @@
+
+
+
 function loading(){
 	$('#menu').hide();
 	$('#loading').show();
-	$('#loadingInfo').html('Connecting to the server ... <br>');
+	$('#loadingInfo').html(msg.multi.info.connecting +' <br>');
 }
 function loaded(){
 	$('#menu').show();
@@ -24,23 +27,23 @@ function errorsHandler(){
 var errors = {
 	connect_error : function(){
 		loading();
-		printLoadingMsg("There was an error connecting");
+		printLoadingMsg(msg.multi.errors.connect_error);
 	},
 	connect_timeout : function(){
 		loading();
-		printLoadingMsg("Connection Timeout");
+		printLoadingMsg(msg.multi.errors.connect_timeout);
 	},
 	reconnect_attempt : function(data){
 		loading();
-		printLoadingMsg("Trying to reconnect <i>("+data+")</i>");
+		printLoadingMsg(msg.multi.errors.reconnect_attempt+" <i>("+data+")</i>");
 	},
 	reconnect_error : function(){
 		loading();
-		printLoadingMsg("There was an error reconnecting");
+		printLoadingMsg(msg.multi.errors.reconnect_error);
 	},
 	reconnect_failed : function(){
 		loading();
-		printLoadingMsg("Reconnection failed");
+		printLoadingMsg(msg.multi.errors.reconnect_failed);
 	}
 }
 

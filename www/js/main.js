@@ -31,3 +31,9 @@ setInterval(function(){
 	var randomColor = Math.floor((Math.random() * colours.length-1) + 1);
 	RandomPosition(signes[randomSign],"nombre"+i, randomTaille, colours[randomColor]);
 },200);
+
+
+$('#campaign').html(msg.main.menu.campaign);
+$('#training').html(msg.main.menu.training);
+$('#credits').html(msg.main.menu.credits);
+$('#lobby').html(msg.main.menu.lobby);
