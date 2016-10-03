@@ -7,6 +7,8 @@ function loadLanguage(){
 	switch(language) {
 	case 'fr':
     case 'fr-FR':
+    case 'fr-BE':
+    case 'fr-CA':
         msg=FR;
         break;
         
