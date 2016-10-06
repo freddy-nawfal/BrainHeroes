@@ -1,4 +1,5 @@
 var EN = {
+
 	main : {
 		menu : {
 			campain : "Campain",
@@ -7,6 +8,7 @@ var EN = {
 			credits : "Credits"
 		}
 	},
+
 	multi : {
 		errors : {
 			connect_error : "There was an error connecting",
@@ -17,6 +19,27 @@ var EN = {
 		},
 		info : {
 			connecting : "Connecting to the server ..."
+		}
+	},
+
+	training : {
+		buttons : {
+			ok : "OK",
+			more : "More",
+			stats : "Stats",
+			back : "Back"
+		},
+		stats : {
+			total : "Total Games",
+			wins : "Wins.",
+			loses : "Loses",
+			ratio : "Ratio",
+			top : "Top wins in a row",
+			average : "Average Time"
+		},
+		text : {
+			lvl : "Level",
+			time : "Time"
 		}
 	}
 	

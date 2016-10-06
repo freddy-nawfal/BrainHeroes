@@ -1,4 +1,5 @@
 var FR = {
+
 	main : {
 		menu : {
 			campaign : "Campagne",
@@ -7,6 +8,7 @@ var FR = {
 			credits : "Crédits"
 		}
 	},
+
 	multi : {
 		errors : {
 			connect_error : "Il y a eu une erreur de connection",
@@ -17,6 +19,27 @@ var FR = {
 			},
 		info : {
 			connecting : "Connection au serveur ..."
+		}
+	},
+
+	training : {
+		buttons : {
+			ok : "OK",
+			more : "Plus",
+			stats : "Stats",
+			back : "Retour"
+		},
+		stats : {
+			total : "Parties totales",
+			wins : "Vict.",
+			loses : "Perd.",
+			ratio : "Ratio",
+			top : "Top victoires d'affilée",
+			average : "Temps moyen"
+		},
+		text : {
+			lvl : "Niveau",
+			time : "Temps"
 		}
 	}
 }

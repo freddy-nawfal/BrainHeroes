@@ -93,7 +93,7 @@ function testReponse(e){
 	var betweenTime = calculateBetweenTime().toFixed(3);
 	if(user_reponse == calcul.reponse.number){
 		$("#calcul").html(calcul.a+calcul.reponse.operator+calcul.b+" = <span class='dope'>"+calcul.reponse.number+"</span>");
-		$('#time').html("Time: "+betweenTime+"s");
+		$('#time').html(msg.training.text.time +": "+betweenTime+"s");
 		personne.nb_juste+=1;
 		personne.justes_affilee+=1;
 		if(personne.justes_affilee > personne.top_justes_affilee) personne.top_justes_affilee = personne.justes_affilee;
@@ -101,7 +101,7 @@ function testReponse(e){
 	}
 	else{
 		$("#calcul").html(calcul.a+calcul.reponse.operator+calcul.b+" = <span class='nope'>&nbsp;"+user_reponse+"&nbsp;</span>&nbsp;"+calcul.reponse.number);
-		$('#time').html("Time: "+betweenTime+"s");
+		$('#time').html(msg.training.text.time+": "+betweenTime+"s");
 		personne.nb_faux+=1;
 		personne.justes_affilee=0;
 		personne.faux_affilee+=1;

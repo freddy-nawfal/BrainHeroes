@@ -12,14 +12,14 @@
     <body>
       <nav id="menu">
         <header>
-          <h2><a href="index.html"><button id="back">Back</button></a> Stats</h2>
+          <h2><a href="index.html"><button id="back">Back</button></a> <span id="statsDisplay">Stats</span></h2>
         </header>
         <div id="stats"></div><br>
 
       </nav>
         <main id="panel">
           <span id="spinner"></span>
-        	<button onclick="slide();">More</button>
+        	<button onclick="slide();" id="more">More</button>
             <div id="progress" style="display:none;">
                   <span id="lvlDisplay">Level <span id="level">0</span></span>
                   <progress value="0" max="100" id="lvl"></progress>
@@ -37,9 +37,16 @@
 				</form>
 			</div>
     </main>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <script type="text/javascript" src="languages/EN.js"></script>
+        <script type="text/javascript" src="languages/FR.js"></script>
+
+        <script type="text/javascript" src="js/loadlanguages.js"></script>
+        <script type="text/javascript" src="js/traininglanguages.js"></script>
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/slideout.min.js"></script>
         <script type="text/javascript" src="js/spin.js"></script>
         <script type="text/javascript" src="js/training.js"></script>
@@ -67,11 +74,11 @@ function slide(){
 }
 
 
-  $('#stats').append('<div>Total Games: '+personne.totalGames()+'</div>');
-  $('#stats').append('<div>Wins: '+personne.nb_juste+' / Loses: '+personne.nb_faux+'</div>');
-  $('#stats').append('<div>Ratio: '+personne.ratioDisplayed()+'</div>');
-  $('#stats').append('<div>Top wins in a row: '+personne.top_justes_affilee+'</div>');
-  $('#stats').append('<div>Average Time: '+personne.AverageTime()+'s</div>');
+$('#stats').append('<div>'+msg.training.stats.total+': '+personne.totalGames()+'</div>');
+$('#stats').append('<div>'+msg.training.stats.wins+': '+personne.nb_juste+' / '+msg.training.stats.loses+': '+personne.nb_faux+'</div>');
+$('#stats').append('<div>'+msg.training.stats.ratio+': '+personne.ratioDisplayed()+'</div>');
+$('#stats').append('<div>'+msg.training.stats.top+': '+personne.top_justes_affilee+'</div>');
+$('#stats').append('<div>'+msg.training.stats.average+': '+personne.AverageTime()+'s</div>');
 </script>
     </body>
 </html>
