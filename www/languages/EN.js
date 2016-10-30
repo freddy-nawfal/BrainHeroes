@@ -18,7 +18,9 @@ var EN = {
 			reconnect_attempt : "Trying to reconnect"
 		},
 		info : {
-			connecting : "Connecting to the server ..."
+			connecting : "Connecting to the server ...",
+			disconnected : "You were disconnected",
+			connected : "CONNECTED TO SERVER"
 		}
 	},
 

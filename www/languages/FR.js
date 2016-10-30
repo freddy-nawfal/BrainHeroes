@@ -11,14 +11,16 @@ var FR = {
 
 	multi : {
 		errors : {
-			connect_error : "Il y a eu une erreur de connection",
+			connect_error : "Il y a eu une erreur de connexion",
 			connect_timeout : "Connection perdue",
-			reconnect_error :  "Il y a eu une erreur de reconnection",
-			reconnect_failed : "La reconnection a échoué",
-			reconnect_attempt : "Tentative de reconnection"
+			reconnect_error :  "Il y a eu une erreur de reconnexion",
+			reconnect_failed : "La reconnexion a échoué",
+			reconnect_attempt : "Tentative de reconnexion"
 			},
 		info : {
-			connecting : "Connection au serveur ..."
+			connecting : "Connection au serveur ...",
+			disconnected : "Vous avez été déconnecté",
+			connected : "CONNECTE AU SERVEUR"
 		}
 	},
 
