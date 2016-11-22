@@ -13,6 +13,7 @@
     <body>
         <div class="app">
            <div id="menu">
+           <div id="test"></div>
                 <div class="behind_container">
                     <span id="tamere" class="behind"></span>
                 </div>
@@ -38,6 +39,19 @@
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript">
             app.initialize();
+
+function playAudio(id) {
+    var url = "file:///android_asset/www/audio/stop.mp3";
+    var my_media = new Media(url,function () {  },function (err) {  });
+    my_media.play();
+}
+
+
+
+setTimeout(function(){
+    playAudio();
+},2000);
+
         </script>
 
     </body>

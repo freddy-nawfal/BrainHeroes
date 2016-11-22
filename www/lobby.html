@@ -46,8 +46,35 @@
         <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
         <script type="text/javascript" src="js/multiplayer/errors.js"></script>
         <script type="text/javascript" src="js/multiplayer/cHandlers.js"></script>
+        <script type="text/javascript" src="js/multiplayer/oHandlers.js"></script>
         <script type="text/javascript" src="js/multiplayer/client.js"></script>
         <script type="text/javascript" src="js/multiplayer/background.js"></script>
-        
+        <script type="text/javascript">
+
+function playAudio(id) {
+    var url = "file:///android_asset/www/audio/stop.mp3";
+    $('#test').html(url);
+    var my_media = new Media(url,
+            // success callback
+             function () { $('#test').append("playAudio():Audio Success"); },
+            // error callback
+             function (err) { $('#test').append("problem: "+JSON.stringify(err)); }
+    );
+           // Play audio
+    my_media.play();
+
+
+    
+}
+
+
+
+setTimeout(function(){
+    playAudio();
+},2000);
+
+
+
+        </script>
     </body>
 </html>

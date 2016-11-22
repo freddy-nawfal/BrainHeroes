@@ -19,6 +19,10 @@ var cHandlers = {
 		}, "Name");
 		
 	},
+	notlogged : function(reason){
+		alertify.error("You are not logged in !");
+		this.login(reason);
+	},
 	disconnect : function(){
 		alertify.confirm(msg.multi.info.disconnected, function (e) {
 		    window.location.replace("index.html");

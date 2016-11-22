@@ -1,11 +1,25 @@
+function storeAudioPosition(cb){
+	cb();
+}
+
+
 $('#training').click(function(){
-	window.location.replace("training.html");
+	storeAudioPosition(function(){
+		window.location.replace("training.html");
+	});
 });
+
 $('#credits').click(function(){
-	window.location.replace("credits.html");
+	storeAudioPosition(function(){
+		window.location.replace("credits.html");
+	});
+	
 });
+
 $('#lobby').click(function(){
-	window.location.replace("lobby.html");
+	storeAudioPosition(function(){
+		window.location.replace("lobby.html");
+	});
 });
 
 var signes = ["&pi;","&Omega;","&Delta;","42","&prop;","3.14","1,61","0,23","2.71","8","7","193","1,41","1,73","6,02","1","2","3","4","5","6","8","9","8,31","6,28","9, 8","0,76","0,59"," &infin;","&micro;","&Sigma;","&forall;"," &exist;","&isin;"," &empty;","&notin;"];

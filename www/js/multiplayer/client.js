@@ -1,5 +1,5 @@
 var names = [];
-
+var last;
 
 function loading(){
 	$('#menu').hide();
@@ -11,6 +11,7 @@ function loaded(){
 	$('#loading').hide();
 	$('#1v1').off('click');
 	$('#1v1').click(function(){
+		last=Date.now();
 		socket.emit("click");
 	});
 	$('#disconnect').off('click');
@@ -20,6 +21,9 @@ function loaded(){
 }
 function printLoadingMsg(msg){
 	$('#loadingInfo').append(msg+"<br>");
+}
+function printSuccessTooltip(msg){
+	alertify.success(msg);
 }
 
 
@@ -36,18 +40,23 @@ function connectionHandlers(){
 	socket.on('connected', cHandlers.connected);
 	socket.on('usersConnected', cHandlers.usersConnected);
 	socket.on('login', cHandlers.login);
+	socket.on('notlogged', cHandlers.notlogged);
 	socket.on('disconnect', cHandlers.disconnect);
 	socket.on('usersNames', cHandlers.gotNames)
 }
+function otherHandlers(){
+	socket.on('clickiti', oHandlers.clickiti);
+}
+
 
 
 loading();
 
 
 
-var socket = io('http://90.126.71.195:3000');
+var socket = io('http://192.168.1.17:3000');
 
 errorsHandler();
 connectionHandlers();
-
+otherHandlers();
 
